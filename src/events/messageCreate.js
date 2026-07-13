@@ -73,6 +73,30 @@ module.exports = {
                             await message.author.send(`⚠️ **Warning:** The content you shared in ${message.guild.name} was detected as malicious/spam and has been deleted. Please refrain from sharing such content.`);
                         } catch (e) { }
                         break;
+                    case 'timeout_1h':
+                        if (message.member.moderatable) {
+                            try {
+                                await message.author.send(`⏳ **Timeout:** You have been timed out in ${message.guild.name} for 1 hour for sharing malicious/spam content.`);
+                            } catch (e) { }
+                            await message.member.timeout(60 * 60 * 1000, 'MrBeast scam virus detected.');
+                        }
+                        break;
+                    case 'timeout_1d':
+                        if (message.member.moderatable) {
+                            try {
+                                await message.author.send(`⌛ **Timeout:** You have been timed out in ${message.guild.name} for 1 day for sharing malicious/spam content.`);
+                            } catch (e) { }
+                            await message.member.timeout(24 * 60 * 60 * 1000, 'MrBeast scam virus detected.');
+                        }
+                        break;
+                    case 'timeout_1w':
+                        if (message.member.moderatable) {
+                            try {
+                                await message.author.send(`📅 **Timeout:** You have been timed out in ${message.guild.name} for 1 week for sharing malicious/spam content.`);
+                            } catch (e) { }
+                            await message.member.timeout(7 * 24 * 60 * 60 * 1000, 'MrBeast scam virus detected.');
+                        }
+                        break;
                     case 'kick':
                         if (message.member.kickable) {
                             try {

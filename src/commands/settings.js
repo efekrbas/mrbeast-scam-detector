@@ -13,6 +13,9 @@ module.exports = {
         const actionNames = {
             'delete': 'Delete Message Only',
             'warn': 'Delete Message and Warn User',
+            'timeout_1h': 'Delete Message and Timeout (1 Hour)',
+            'timeout_1d': 'Delete Message and Timeout (1 Day)',
+            'timeout_1w': 'Delete Message and Timeout (1 Week)',
             'kick': 'Delete Message and Kick User',
             'ban': 'Delete Message and Ban User'
         };
@@ -22,7 +25,7 @@ module.exports = {
             .setDescription('Choose the punishment the bot should apply to users sharing fake "MrBeast Casino" links and images.')
             .setColor('#2F3136')
             .addFields(
-                { name: 'Current Status', value: `Current setting: **${actionNames[currentAction]}**` }
+                { name: 'Current Status', value: `Current setting: **${actionNames[currentAction] || 'Delete Message Only'}**` }
             )
             .setFooter({ text: 'Please select an action from the menu below.' });
 
@@ -43,6 +46,27 @@ module.exports = {
                     value: 'warn',
                     emoji: '⚠️',
                     default: currentAction === 'warn'
+                },
+                {
+                    label: 'Delete & Timeout (1H)',
+                    description: 'Deletes and timeouts the user for 1 Hour.',
+                    value: 'timeout_1h',
+                    emoji: '⏳',
+                    default: currentAction === 'timeout_1h'
+                },
+                {
+                    label: 'Delete & Timeout (1D)',
+                    description: 'Deletes and timeouts the user for 1 Day.',
+                    value: 'timeout_1d',
+                    emoji: '⌛',
+                    default: currentAction === 'timeout_1d'
+                },
+                {
+                    label: 'Delete & Timeout (1W)',
+                    description: 'Deletes and timeouts the user for 1 Week.',
+                    value: 'timeout_1w',
+                    emoji: '📅',
+                    default: currentAction === 'timeout_1w'
                 },
                 {
                     label: 'Delete & Kick',

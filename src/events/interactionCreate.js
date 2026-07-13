@@ -32,6 +32,9 @@ module.exports = {
                 const actionNames = {
                     'delete': 'Delete Message Only',
                     'warn': 'Delete Message and Warn User',
+                    'timeout_1h': 'Delete Message and Timeout (1 Hour)',
+                    'timeout_1d': 'Delete Message and Timeout (1 Day)',
+                    'timeout_1w': 'Delete Message and Timeout (1 Week)',
                     'kick': 'Delete Message and Kick User',
                     'ban': 'Delete Message and Ban User'
                 };
