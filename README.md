@@ -1,14 +1,20 @@
-# MrBeast Scam Detector Discord Bot 🛡️
+# AI-Powered Discord Anti-Scam Framework (MrBeast Detector) 🛡️
 
-A powerful and reliable Discord bot designed to detect and automatically delete "MrBeast Casino / Vyro" scam images and text messages. Scammers frequently use manipulated images with fake promo codes and casino links. This bot uses OCR (Optical Character Recognition) to read the text inside images and take action instantly.
+A powerful, modular, and AI-driven Discord bot framework designed to detect and automatically delete sophisticated image-based scams (like the "MrBeast Casino / Vyro" scams). Scammers frequently bypass standard text filters by using manipulated images, collages, and blurry screenshots with fake promo codes. 
 
-## Features ✨
-- **Image Scanning (OCR):** Uses `tesseract.js` to read text embedded inside images.
-- **Image Enhancement:** Pre-processes dark and tilted images using `jimp` (scaling, grayscale, and contrast enhancement) to ensure accurate reading.
-- **Text Scanning:** Also scans regular text messages for scam links and keywords.
-- **Customizable Punishments:** An interactive `/settings` command for Server Administrators to choose the punishment (Delete only, Warn, Kick, or Ban).
-- **Persistent Settings:** Uses `better-sqlite3` to safely store server settings.
-- **Size Limit Protection:** Ignores images larger than 8MB to prevent resource exhaustion.
+This bot uses a multi-layered Artificial Intelligence approach combining **Optical Character Recognition (OCR)** and **Perceptual Hashing (pHash)** to instantly catch and punish scammers.
+
+## Core Technologies ✨
+- **Perceptual Hashing (Computer Vision):** Uses `jimp` to generate a 64-bit structural DNA of malicious images. Even if scammers crop, darken, or add emojis to the scam image, the bot uses a *Hamming Distance* algorithm to detect the match and delete the message in milliseconds—without even needing OCR.
+- **Machine Learning OCR:** Uses `tesseract.js` (LSTM Neural Networks) to read text embedded inside images that slip past the pHash filter. 
+- **Image Enhancement:** Pre-processes dark and tilted images (scaling, grayscale, and contrast enhancement) to ensure accurate OCR reading.
+- **Dynamic Database & Management:** Uses `better-sqlite3` to safely store server settings and malicious image hashes persistently.
+
+## Commands ⚙️
+- `/settings` - Opens an interactive menu for Server Administrators to choose the punishment (Delete only, Warn, Timeout (1H/1D/1W), Kick, or Ban).
+- `/hashes add <hash>` - Teaches the bot a new malicious image layout by saving its 64-bit hash to the database.
+- `/hashes remove <hash>` - Removes a hash from the database.
+- `/hashes list` - Lists all currently blacklisted image hashes.
 
 ## Installation 🚀
 
@@ -25,6 +31,9 @@ A powerful and reliable Discord bot designed to detect and automatically delete 
    node .
    ```
 
-## Setup & Usage ⚙️
-- Invite the bot to your server with **Administrator** permissions (or at least `Manage Messages`, `Kick Members`, and `Ban Members`).
-- Type `/settings` in your server to open the configuration menu and select what the bot should do when it catches a scammer.
+## Getting Image Hashes
+When the bot is running, it automatically logs the 64-bit pHash of every uploaded image to the console:
+```text
+Image Hash: 1011001110001110...
+```
+Simply copy this hash from your terminal and use `/hashes add <hash>` in your Discord server to train the AI to automatically delete that specific image layout.
