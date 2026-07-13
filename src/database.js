@@ -4,12 +4,18 @@ const path = require('path');
 // Initialize SQLite database
 const db = new Database(path.join(__dirname, '..', 'settings.sqlite'));
 
-// Create table if not exists
+// Create tables if not exists
 db.pragma('journal_mode = WAL');
 db.prepare(`
     CREATE TABLE IF NOT EXISTS guild_settings (
         guild_id TEXT PRIMARY KEY,
         action TEXT DEFAULT 'delete'
+    )
+`).run();
+
+db.prepare(`
+    CREATE TABLE IF NOT EXISTS scam_hashes (
+        hash TEXT PRIMARY KEY
     )
 `).run();
 
@@ -26,7 +32,23 @@ const setAction = (guildId, action) => {
     setSettingStmt.run(guildId, action);
 };
 
+// Hash functions
+const getAllHashes = () => {
+    return db.prepare('SELECT hash FROM scam_hashes').all().map(row => row.hash);
+};
+
+const addHash = (hash) => {
+    db.prepare('INSERT OR IGNORE INTO scam_hashes (hash) VALUES (?)').run(hash);
+};
+
+const removeHash = (hash) => {
+    db.prepare('DELETE FROM scam_hashes WHERE hash = ?').run(hash);
+};
+
 module.exports = {
     getAction,
-    setAction
+    setAction,
+    getAllHashes,
+    addHash,
+    removeHash
 };
