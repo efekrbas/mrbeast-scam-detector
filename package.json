@@ -1,0 +1,27 @@
+{
+  "name": "mrbeast-detector",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/efekrbas/mrbeast-detector.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/efekrbas/mrbeast-detector/issues"
+  },
+  "homepage": "https://github.com/efekrbas/mrbeast-detector#readme",
+  "dependencies": {
+    "better-sqlite3": "^12.11.1",
+    "discord.js": "^14.26.5",
+    "jimp": "^0.22.12",
+    "tesseract.js": "^7.0.0"
+  }
+}
