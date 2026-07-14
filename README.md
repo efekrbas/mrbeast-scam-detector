@@ -1,4 +1,4 @@
-# AI-Powered Discord Anti-Scam Framework (MrBeast Detector) 🛡️
+# AI-Powered Discord Anti-Scam Framework (MrBeast Scam Detector) 🛡️
 
 A powerful, modular, and AI-driven Discord bot framework designed to detect and automatically delete sophisticated image-based scams (like the "MrBeast Casino / Vyro" scams). Scammers frequently bypass standard text filters by using manipulated images, collages, and blurry screenshots with fake promo codes. 
 
