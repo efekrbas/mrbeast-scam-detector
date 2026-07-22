@@ -113,7 +113,7 @@ module.exports = {
 
         const scanText = (textToScan) => {
             if (!textToScan) return false;
-            
+
             const lowerText = textToScan.toLowerCase();
             let matchCount = 0;
             for (const keyword of SUSPICIOUS_KEYWORDS) {
@@ -157,10 +157,20 @@ module.exports = {
                 const savedHashes = getAllHashes();
 
                 for (const [id, attachment] of imageAttachments) {
-                    // Performans: 8 MB'dan büyük görselleri es geç
+                    // Performans ve Güvenlik: 8 MB'dan büyük veya boyutları çok büyük görselleri es geç (Image Bomb koruması)
                     if (attachment.size > 8 * 1024 * 1024) {
                         console.log("Image is larger than 8MB, skipping.");
                         continue;
+                    }
+
+                    // Maksimum piksel sınırlandırması (Örn: 4K çözünürlük civarı ~ 8.2 milyon piksel)
+                    // Çok yüksek boyutlu (örneğin 20000x20000) resimler Jimp'i çökertebilir (OOM).
+                    if (attachment.width && attachment.height) {
+                        const totalPixels = attachment.width * attachment.height;
+                        if (totalPixels > 8500000) {
+                            console.log(`Image dimensions too large (${attachment.width}x${attachment.height}), skipping.`);
+                            continue;
+                        }
                     }
 
                     try {
@@ -196,7 +206,7 @@ module.exports = {
                         // --- OCR Kontrolü --- (Eğer pHash eşleşmediyse son çare OCR yap)
                         image.scale(2);
                         image.greyscale();
-                        image.contrast(0.5); 
+                        image.contrast(0.5);
 
                         const processedBuffer = await image.getBufferAsync(Jimp.MIME_PNG);
 
